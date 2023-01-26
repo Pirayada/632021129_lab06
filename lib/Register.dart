@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lab06/auth_service.dart';
+import 'package:lab06/loginpage.dart';
 
 class RegisterPages extends StatefulWidget {
   const RegisterPages({super.key});
@@ -44,6 +46,14 @@ class _RegisterPagesState extends State<RegisterPages> {
                 onPressed: () {
                   if (_formkey.currentState!.validate()) {
                     print("OK");
+                    print(_emailController.text);
+                    AuthService.registerUser(
+                            _emailController.text, _passwordController.text)
+                        .then((value) {
+                      if (value == 1) {
+                        Navigator.pop(context);
+                      }
+                    });
                   }
                 },
                 child: const Text("Register")),
